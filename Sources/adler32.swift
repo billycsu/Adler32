@@ -18,13 +18,8 @@ public class Adler32 {
     /// - parameter data: data to add to the checksum
     public func addData(data: [UInt8]) {
         for c in data {
-            if self.counter == 5552 {
-                self.counter = 0
-                s1 = s1 % 65521
-                s2 = s2 % 65521
-            }
-            s1 = (s1 + UInt32(c))
-            s2 = (s2 + s1)
+            s1 = (s1 + UInt32(c)) % 65521
+            s2 = (s2 + s1) % 65521
             self.counter += 1
         }
     }
